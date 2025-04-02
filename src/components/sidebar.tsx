@@ -7,6 +7,7 @@ import {
   HiCollection,
   HiInformationCircle,
   HiLogin,
+  HiLogout,
   HiPencil,
   HiSearch,
   HiShoppingBag,
@@ -47,17 +48,6 @@ const ExampleSidebar: FC = function () {
                 Dashboard
               </Sidebar.Item>
               <Sidebar.Item
-                href="/e-commerce/products"
-                icon={HiShoppingBag}
-                className={
-                  "/e-commerce/products" === currentPage
-                    ? "bg-gray-100 dark:bg-gray-700"
-                    : ""
-                }
-              >
-                Products
-              </Sidebar.Item>
-              <Sidebar.Item
                 href="/users/list"
                 icon={HiUsers}
                 className={
@@ -66,33 +56,28 @@ const ExampleSidebar: FC = function () {
                     : ""
                 }
               >
-                Users list
+                Users Management
               </Sidebar.Item>
-              <Sidebar.Item href="/authentication/sign-in" icon={HiLogin}>
-                Sign in
+              <Sidebar.Item href="/e-commerce/products" icon={HiShoppingBag}>
+                Manage Keys
               </Sidebar.Item>
-              <Sidebar.Item href="/authentication/sign-up" icon={HiPencil}>
-                Sign up
+
+              <Sidebar.Item href="/users/list" icon={HiUsers}>
+                Locate Keys
+              </Sidebar.Item>
+              <Sidebar.Item href="/users/list" icon={HiUsers}>
+                Schedules
+              </Sidebar.Item>
+              <Sidebar.Item href="/users/list" icon={HiUsers}>
+                System Logs
               </Sidebar.Item>
             </Sidebar.ItemGroup>
             <Sidebar.ItemGroup>
               <Sidebar.Item
                 href="https://github.com/themesberg/flowbite-react/"
-                icon={HiClipboard}
+                icon={HiLogout}
               >
-                Docs
-              </Sidebar.Item>
-              <Sidebar.Item
-                href="https://flowbite-react.com/"
-                icon={HiCollection}
-              >
-                Components
-              </Sidebar.Item>
-              <Sidebar.Item
-                href="https://github.com/themesberg/flowbite-react/issues"
-                icon={HiInformationCircle}
-              >
-                Help
+                Logout
               </Sidebar.Item>
             </Sidebar.ItemGroup>
           </Sidebar.Items>
