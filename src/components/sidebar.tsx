@@ -1,11 +1,15 @@
 import { Sidebar, TextInput } from "flowbite-react";
 import type { FC } from "react";
 import { useEffect, useState } from "react";
+import { FaKey } from "react-icons/fa";
 import {
+  HiCalendar,
   HiChartPie,
   HiClipboard,
+  HiClipboardCheck,
   HiCollection,
   HiInformationCircle,
+  HiLocationMarker,
   HiLogin,
   HiLogout,
   HiPencil,
@@ -58,17 +62,17 @@ const ExampleSidebar: FC = function () {
               >
                 Users Management
               </Sidebar.Item>
-              <Sidebar.Item href="/e-commerce/products" icon={HiShoppingBag}>
+              <Sidebar.Item href="/e-commerce/products" icon={FaKey}>
                 Manage Keys
               </Sidebar.Item>
 
-              <Sidebar.Item href="/users/list" icon={HiUsers}>
+              <Sidebar.Item href="/users/list" icon={HiLocationMarker}>
                 Locate Keys
               </Sidebar.Item>
-              <Sidebar.Item href="/users/list" icon={HiUsers}>
+              <Sidebar.Item href="/users/list" icon={HiCalendar}>
                 Schedules
               </Sidebar.Item>
-              <Sidebar.Item href="/users/list" icon={HiUsers}>
+              <Sidebar.Item href="/users/list" icon={HiClipboardCheck}>
                 System Logs
               </Sidebar.Item>
             </Sidebar.ItemGroup>
