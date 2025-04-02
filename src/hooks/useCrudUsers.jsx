@@ -1,9 +1,15 @@
-import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+import {
+  addDoc,
+  collection,
+  onSnapshot,
+  serverTimestamp,
+} from "firebase/firestore";
 import { db } from "../../firebase";
 const useCrudUsers = () => {
+  const colRef = collection(db, "users");
+
   const addUser = async (data) => {
     try {
-      const colRef = collection(db, "users");
       const profile = `https://avatar.iran.liara.run/public/${
         data.gender == "female" ? "girl" : "boy"
       }?username=${data.fullName}`;
@@ -12,13 +18,24 @@ const useCrudUsers = () => {
         ...data,
         createdAt: serverTimestamp(),
         profilePic: profile,
+        active: true,
       });
     } catch (error) {
       throw new Error(error.message);
     }
   };
 
-  return { addUser };
+  const getUsers = (setUsers) => {
+    onSnapshot(colRef, (snaphot) => {
+      const output = [];
+      snaphot.docs.forEach((doc) => {
+        output.push({ ...doc.data(), id: doc.id });
+      });
+      setUsers(output);
+    });
+  };
+
+  return { addUser, getUsers };
 };
 
 export default useCrudUsers;

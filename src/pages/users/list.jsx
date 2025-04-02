@@ -18,7 +18,7 @@ import {
   HiEye,
   HiEyeOff,
 } from "react-icons/hi";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import NavbarSidebarLayout from "../../layouts/navbar-sidebar";
 import AdminTable from "../../components/adminTable";
 import useCrudUser from "../../hooks/useCrudUsers";
@@ -27,6 +27,7 @@ import { toast } from "react-toastify";
 const UserListPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [users, setUsers] = useState([]);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -34,7 +35,7 @@ const UserListPage = () => {
     gender: "Male",
     password: "",
   });
-  const { addUser } = useCrudUser();
+  const { addUser, getUsers } = useCrudUser();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -49,6 +50,10 @@ const UserListPage = () => {
       toast.error(error.message);
     }
   };
+
+  useEffect(() => {
+    getUsers(setUsers);
+  }, []);
 
   return (
     <NavbarSidebarLayout isFooter={false}>
@@ -102,7 +107,7 @@ const UserListPage = () => {
         <div className="overflow-x-auto">
           <div className="inline-block min-w-full align-middle">
             <div className="overflow-hidden shadow">
-              <AdminTable />
+              <AdminTable users={users} />
             </div>
           </div>
         </div>
