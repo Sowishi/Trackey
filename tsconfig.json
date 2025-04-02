@@ -32,6 +32,7 @@
     "**/*.mjs",
     "**/*.ts",
     "**/*.tsx",
-    "src/pages/index.jsx"
+    "src/pages/index.jsx",
+    "src/pages/users/list.jsx"
   ]
 }
