@@ -69,7 +69,7 @@ const ExampleSidebar: FC = function () {
               <Sidebar.Item href="/locate-keys" icon={HiLocationMarker}>
                 Locate Keys
               </Sidebar.Item>
-              <Sidebar.Item href="/users/list" icon={HiCalendar}>
+              <Sidebar.Item href="/schedules" icon={HiCalendar}>
                 Schedules
               </Sidebar.Item>
               <Sidebar.Item href="/users/list" icon={HiClipboardCheck}>
