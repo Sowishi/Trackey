@@ -14,6 +14,7 @@ import ManageKeys from "./pages/manage-keys";
 import LocateKeys from "./pages/locate-keys";
 import Schedules from "./pages/schedules";
 import Logs from "./pages/logs";
+import { ToastContainer } from "react-toastify";
 
 const container = document.getElementById("root");
 
@@ -38,6 +39,7 @@ root.render(
           <Route path="/users/list" element={<UserListPage />} />
         </Routes>
       </BrowserRouter>
+      <ToastContainer />
     </Flowbite>
   </StrictMode>
 );

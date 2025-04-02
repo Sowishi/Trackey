@@ -1,5 +1,12 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { Breadcrumb, Button, Label, Modal, TextInput } from "flowbite-react";
+import {
+  Breadcrumb,
+  Button,
+  Label,
+  Modal,
+  TextInput,
+  Select,
+} from "flowbite-react";
 import {
   HiCog,
   HiDocumentDownload,
@@ -8,26 +15,33 @@ import {
   HiHome,
   HiPlus,
   HiTrash,
+  HiEye,
+  HiEyeOff,
 } from "react-icons/hi";
 import { useState } from "react";
 import NavbarSidebarLayout from "../../layouts/navbar-sidebar";
 import AdminTable from "../../components/adminTable";
+import useCrudUser from "../../hooks/useCrudUsers";
+import { toast } from "react-toastify";
 
 const UserListPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     position: "",
-    gender: "",
+    gender: "Male",
+    password: "",
   });
+  const { addUser } = useCrudUser();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = () => {
-    console.log("User Data:", formData);
+    addUser(formData);
     setIsModalOpen(false);
   };
 
@@ -116,11 +130,36 @@ const UserListPage = () => {
             />
 
             <Label>Gender</Label>
-            <TextInput
+            <Select
               name="gender"
               value={formData.gender}
               onChange={handleChange}
-            />
+            >
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Other">Other</option>
+            </Select>
+
+            <Label>Password</Label>
+            <div className="relative">
+              <TextInput
+                type={showPassword ? "text" : "password"}
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+              />
+              <button
+                type="button"
+                className="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-500 dark:text-gray-400"
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                {showPassword ? (
+                  <HiEyeOff className="text-xl mr-3" />
+                ) : (
+                  <HiEye className="text-xl mr-3" />
+                )}
+              </button>
+            </div>
           </div>
         </Modal.Body>
         <Modal.Footer>

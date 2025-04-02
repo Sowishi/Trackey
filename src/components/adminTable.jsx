@@ -44,7 +44,10 @@ const AdminTable = () => {
             </Table.Cell>
             <Table.Cell className="p-4 text-base font-normal text-gray-900 dark:text-white">
               <div className="flex items-center">
-                <div className="mr-2 h-2.5 w-2.5 rounded-full bg-green-400"></div>
+                <div
+                  style={{ width: 10, height: 10 }}
+                  className="mr-2  rounded-full bg-green-400"
+                ></div>
                 Active
               </div>
             </Table.Cell>
