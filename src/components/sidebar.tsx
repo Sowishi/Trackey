@@ -77,10 +77,7 @@ const ExampleSidebar: FC = function () {
               </Sidebar.Item>
             </Sidebar.ItemGroup>
             <Sidebar.ItemGroup>
-              <Sidebar.Item
-                href="https://github.com/themesberg/flowbite-react/"
-                icon={HiLogout}
-              >
+              <Sidebar.Item href="/authentication/sign-in" icon={HiLogout}>
                 Logout
               </Sidebar.Item>
             </Sidebar.ItemGroup>
