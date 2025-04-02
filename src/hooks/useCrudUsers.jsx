@@ -1,6 +1,8 @@
 import {
   addDoc,
   collection,
+  deleteDoc,
+  doc,
   onSnapshot,
   serverTimestamp,
 } from "firebase/firestore";
@@ -25,6 +27,15 @@ const useCrudUsers = () => {
     }
   };
 
+  const deleteUser = async (id) => {
+    try {
+      const docRef = doc(db, "users", id);
+      await deleteDoc(docRef);
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  };
+
   const getUsers = (setUsers) => {
     onSnapshot(colRef, (snaphot) => {
       const output = [];
@@ -35,7 +46,7 @@ const useCrudUsers = () => {
     });
   };
 
-  return { addUser, getUsers };
+  return { addUser, getUsers, deleteUser };
 };
 
 export default useCrudUsers;

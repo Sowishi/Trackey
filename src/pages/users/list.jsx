@@ -36,7 +36,7 @@ const UserListPage = () => {
     gender: "Male",
     password: "",
   });
-  const { addUser, getUsers } = useCrudUser();
+  const { addUser, getUsers, deleteUser } = useCrudUser();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -47,6 +47,15 @@ const UserListPage = () => {
       await addUser(formData);
       setIsModalOpen(false);
       toast.success("Successfully Added User");
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
+
+  const handleDelete = async (id) => {
+    try {
+      await deleteUser(id);
+      toast.success("Deleted Successfully!");
     } catch (error) {
       toast.error(error.message);
     }
@@ -116,7 +125,9 @@ const UserListPage = () => {
                 </>
               )}
 
-              {users.length >= 1 && <AdminTable users={users} />}
+              {users.length >= 1 && (
+                <AdminTable users={users} handleDelete={handleDelete} />
+              )}
             </div>
           </div>
         </div>
