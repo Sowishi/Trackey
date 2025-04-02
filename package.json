@@ -25,6 +25,10 @@
     "yarn": ">= 1"
   },
   "dependencies": {
+    "@fullcalendar/core": "^6.1.15",
+    "@fullcalendar/daygrid": "^6.1.15",
+    "@fullcalendar/react": "^6.1.15",
+    "@react-google-maps/api": "^2.20.6",
     "apexcharts": "^3.36.3",
     "classnames": "^2.3.2",
     "firebase": "^11.6.0",
