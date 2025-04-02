@@ -11,7 +11,7 @@ const useCrudUsers = () => {
   const addUser = async (data) => {
     try {
       const profile = `https://avatar.iran.liara.run/public/${
-        data.gender == "female" ? "girl" : "boy"
+        data.gender == "Female" ? "girl" : "boy"
       }?username=${data.fullName}`;
 
       await addDoc(colRef, {

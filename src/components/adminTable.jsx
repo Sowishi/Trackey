@@ -1,4 +1,5 @@
 import { Button, Checkbox, Label, Table } from "flowbite-react";
+import moment from "moment";
 import { FaEdit } from "react-icons/fa";
 import { HiTrash } from "react-icons/hi";
 
@@ -14,6 +15,8 @@ const AdminTable = ({ users }) => {
           <Table.HeadCell>Position</Table.HeadCell>
           <Table.HeadCell>Gender</Table.HeadCell>
           <Table.HeadCell>Status</Table.HeadCell>
+          <Table.HeadCell>Created At</Table.HeadCell>
+
           <Table.HeadCell className="text-center">Actions</Table.HeadCell>
         </Table.Head>
         <Table.Body className="divide-y divide-gray-200 dark:divide-gray-700 bg-white dark:bg-gray-800">
@@ -43,6 +46,7 @@ const AdminTable = ({ users }) => {
                 <Table.Cell className="p-4 text-base font-medium text-gray-900 dark:text-white">
                   {user.gender}
                 </Table.Cell>
+
                 <Table.Cell className="p-4 text-base font-normal text-gray-900 dark:text-white">
                   <div className="flex items-center">
                     <div
@@ -51,6 +55,9 @@ const AdminTable = ({ users }) => {
                     ></div>
                     Active
                   </div>
+                </Table.Cell>
+                <Table.Cell className="p-4 text-base font-medium text-gray-900 dark:text-white">
+                  {moment(user.createdAt.toDate()).format("LLL")}
                 </Table.Cell>
                 <Table.Cell className="p-4 flex justify-center space-x-2">
                   <Button color="info" size="sm">
