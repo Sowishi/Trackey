@@ -13,6 +13,7 @@ import UserListPage from "./pages/users/list";
 import ManageKeys from "./pages/manage-keys";
 import LocateKeys from "./pages/locate-keys";
 import Schedules from "./pages/schedules";
+import Logs from "./pages/logs";
 
 const container = document.getElementById("root");
 
@@ -28,9 +29,10 @@ root.render(
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<DashboardPage />} index />
-          <Route path="/manage-keys" element={<ManageKeys />} index />
-          <Route path="/locate-keys" element={<LocateKeys />} index />\
-          <Route path="/schedules" element={<Schedules />} index />
+          <Route path="/manage-keys" element={<ManageKeys />} />
+          <Route path="/locate-keys" element={<LocateKeys />} />\
+          <Route path="/schedules" element={<Schedules />} />
+          <Route path="/logs" element={<Logs />} />
           <Route path="/authentication/sign-in" element={<SignInPage />} />
           <Route path="/authentication/sign-up" element={<SignUpPage />} />
           <Route path="/users/list" element={<UserListPage />} />
