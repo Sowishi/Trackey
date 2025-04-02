@@ -47,6 +47,13 @@ const UserListPage = () => {
       await addUser(formData);
       setIsModalOpen(false);
       toast.success("Successfully Added User");
+      setFormData({
+        name: "",
+        email: "",
+        position: "Admin",
+        gender: "Male",
+        password: "",
+      });
     } catch (error) {
       toast.error(error.message);
     }
