@@ -66,7 +66,7 @@ const ExampleSidebar: FC = function () {
                 Manage Keys
               </Sidebar.Item>
 
-              <Sidebar.Item href="/users/list" icon={HiLocationMarker}>
+              <Sidebar.Item href="/locate-keys" icon={HiLocationMarker}>
                 Locate Keys
               </Sidebar.Item>
               <Sidebar.Item href="/users/list" icon={HiCalendar}>

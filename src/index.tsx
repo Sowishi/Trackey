@@ -11,6 +11,7 @@ import SignInPage from "./pages/authentication/sign-in";
 import SignUpPage from "./pages/authentication/sign-up";
 import UserListPage from "./pages/users/list";
 import ManageKeys from "./pages/manage-keys";
+import LocateKeys from "./pages/locate-keys";
 
 const container = document.getElementById("root");
 
@@ -27,6 +28,7 @@ root.render(
         <Routes>
           <Route path="/" element={<DashboardPage />} index />
           <Route path="/manage-keys" element={<ManageKeys />} index />
+          <Route path="/locate-keys" element={<LocateKeys />} index />
 
           <Route path="/authentication/sign-in" element={<SignInPage />} />
           <Route path="/authentication/sign-up" element={<SignUpPage />} />
