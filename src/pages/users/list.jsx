@@ -40,9 +40,14 @@ const UserListPage = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = () => {
-    addUser(formData);
-    setIsModalOpen(false);
+  const handleSubmit = async () => {
+    try {
+      await addUser(formData);
+      setIsModalOpen(false);
+      toast.success("Successfully Added User");
+    } catch (error) {
+      toast.error(error.message);
+    }
   };
 
   return (
