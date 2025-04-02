@@ -62,7 +62,7 @@ const ExampleSidebar: FC = function () {
               >
                 Users Management
               </Sidebar.Item>
-              <Sidebar.Item href="/e-commerce/products" icon={FaKey}>
+              <Sidebar.Item href="/manage-keys" icon={FaKey}>
                 Manage Keys
               </Sidebar.Item>
 
