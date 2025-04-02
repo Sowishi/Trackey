@@ -6,6 +6,7 @@ import {
   Modal,
   TextInput,
   Select,
+  Spinner,
 } from "flowbite-react";
 import {
   HiCog,
@@ -107,7 +108,15 @@ const UserListPage = () => {
         <div className="overflow-x-auto">
           <div className="inline-block min-w-full align-middle">
             <div className="overflow-hidden shadow">
-              <AdminTable users={users} />
+              {users.length <= 0 && (
+                <>
+                  <div className="container mx-auto flex justify-center items-center">
+                    <Spinner />
+                  </div>
+                </>
+              )}
+
+              {users.length >= 1 && <AdminTable users={users} />}
             </div>
           </div>
         </div>

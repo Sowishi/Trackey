@@ -57,7 +57,9 @@ const AdminTable = ({ users }) => {
                   </div>
                 </Table.Cell>
                 <Table.Cell className="p-4 text-base font-medium text-gray-900 dark:text-white">
-                  {moment(user.createdAt.toDate()).format("LLL")}
+                  {user.createdAt
+                    ? moment(user.createdAt.toDate()).format("LLL")
+                    : "---"}
                 </Table.Cell>
                 <Table.Cell className="p-4 flex justify-center space-x-2">
                   <Button color="info" size="sm">
