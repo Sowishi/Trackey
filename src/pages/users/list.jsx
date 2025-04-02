@@ -32,7 +32,7 @@ const UserListPage = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    position: "",
+    position: "Admin",
     gender: "Male",
     password: "",
   });
@@ -119,8 +119,8 @@ const UserListPage = () => {
             <div className="overflow-hidden shadow">
               {users.length <= 0 && (
                 <>
-                  <div className="container mx-auto flex justify-center items-center">
-                    <Spinner />
+                  <div className="container h-[400px] mx-auto flex justify-center items-center">
+                    <Spinner size={"lg"} />
                   </div>
                 </>
               )}
@@ -135,7 +135,7 @@ const UserListPage = () => {
 
       {/* Add User Modal */}
       <Modal show={isModalOpen} onClose={() => setIsModalOpen(false)}>
-        <Modal.Header>Add User</Modal.Header>
+        <Modal.Header>Add User </Modal.Header>
         <Modal.Body>
           <div className="space-y-4">
             <Label>Name</Label>
@@ -154,6 +154,7 @@ const UserListPage = () => {
 
             <Label>Position</Label>
             <TextInput
+              disabled
               name="position"
               value={formData.position}
               onChange={handleChange}

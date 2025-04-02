@@ -4,7 +4,7 @@ module.exports = {
   content: [
     "./index.html",
     "./node_modules/flowbite-react/lib/**/*.{js,ts}",
-    "./src/**/*.{ts,tsx}",
+    "./src/**/*.{ts,tsx,jsx}",
   ],
   theme: {
     colors: {
