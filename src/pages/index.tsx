@@ -12,7 +12,9 @@ const DashboardPage = () => {
   return (
     <NavbarSidebarLayout>
       <div className="container mx-auto h-screen p-6">
-        <h1 className="text-3xl font-semibold text-gray-800 mb-8">Dashboard</h1>
+        <h1 className="text-3xl font-semibold text-gray-800 dark:text-white mb-8">
+          Dashboard
+        </h1>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
           {/* Total Keys Card */}
