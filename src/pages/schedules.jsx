@@ -4,6 +4,7 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import NavbarSidebarLayout from "../layouts/navbar-sidebar";
 import { Modal, Button, Label, TextInput } from "flowbite-react";
+import useCrudSched from "../hooks/useCrudSched";
 
 const Schedules = () => {
   const [events, setEvents] = useState([]);
@@ -15,11 +16,11 @@ const Schedules = () => {
     end: "",
   });
 
-  const handleAddEvent = () => {
-    if (!newEvent.title || !newEvent.start || !newEvent.end) return;
+  const { addSched } = useCrudSched();
 
-    setEvents((prev) => [...prev, newEvent]);
-    setNewEvent({ title: "", start: "", end: "" });
+  const handleAddEvent = () => {
+    console.log("fkdj");
+    addSched(newEvent);
     setOpenModal(false);
   };
 
