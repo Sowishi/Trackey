@@ -1,6 +1,5 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-
 import "./index.css";
 import theme from "./flowbite-theme";
 import { Flowbite } from "flowbite-react";
@@ -15,6 +14,7 @@ import LocateKeys from "./pages/locate-keys";
 import Schedules from "./pages/schedules";
 import Logs from "./pages/logs";
 import { ToastContainer } from "react-toastify";
+import ProtectedRoute from "./components/protectedRoute";
 
 const container = document.getElementById("root");
 
@@ -29,14 +29,59 @@ root.render(
     <Flowbite theme={{ theme }}>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<DashboardPage />} index />
-          <Route path="/manage-keys" element={<ManageKeys />} />
-          <Route path="/locate-keys" element={<LocateKeys />} />\
-          <Route path="/schedules" element={<Schedules />} />
-          <Route path="/logs" element={<Logs />} />
+          {/* ✅ Protected routes */}
+          <Route
+            path="/"
+            element={
+              <ProtectedRoute>
+                <DashboardPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/manage-keys"
+            element={
+              <ProtectedRoute>
+                <ManageKeys />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/locate-keys"
+            element={
+              <ProtectedRoute>
+                <LocateKeys />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/schedules"
+            element={
+              <ProtectedRoute>
+                <Schedules />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/logs"
+            element={
+              <ProtectedRoute>
+                <Logs />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/users/list"
+            element={
+              <ProtectedRoute>
+                <UserListPage />
+              </ProtectedRoute>
+            }
+          />
+
+          {/* ✅ Public routes */}
           <Route path="/authentication/sign-in" element={<SignInPage />} />
           <Route path="/authentication/sign-up" element={<SignUpPage />} />
-          <Route path="/users/list" element={<UserListPage />} />
         </Routes>
       </BrowserRouter>
       <ToastContainer />

@@ -1,72 +1,100 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { Button, Card, Checkbox, Label, TextInput } from "flowbite-react";
-import type { FC } from "react";
+import { useState } from "react";
+import type { FC, FormEvent } from "react";
+import logo from "../../assets/logo.png";
 
 const SignInPage: FC = function () {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleLogin = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    // ✅ Example authentication (replace with real backend logic)
+    if (email === "admin@trackey.com" && password === "password123") {
+      const userData = {
+        email,
+        token: "example-jwt-token",
+      };
+
+      localStorage.setItem("trackeyUser", JSON.stringify(userData));
+      alert("Login successful!");
+
+      // 🔁 Optionally redirect
+      window.location.href = "/"; // Change this as needed
+    } else {
+      alert("Invalid email or password.");
+    }
+  };
+
   return (
-    <div className="flex flex-col items-center justify-center px-6 lg:h-screen lg:gap-y-12">
-      <div className="my-6 flex items-center gap-x-1 lg:my-0">
-        <img
-          alt="Flowbite logo"
-          src="https://flowbite.com/docs/images/logo.svg"
-          className="mr-3 h-12"
-        />
-        <span className="self-center whitespace-nowrap text-2xl font-semibold dark:text-white">
-          Flowbite
-        </span>
-      </div>
-      <Card
-        horizontal
-        imgSrc="/images/authentication/login.jpg"
-        imgAlt=""
-        className="w-full md:max-w-screen-sm [&>img]:hidden md:[&>img]:w-96 md:[&>img]:p-0 md:[&>*]:w-full md:[&>*]:p-16 lg:[&>img]:block"
-      >
-        <h1 className="mb-3 text-2xl font-bold dark:text-white md:text-3xl">
-          Sign in to platform
-        </h1>
-        <form>
-          <div className="mb-4 flex flex-col gap-y-3">
-            <Label htmlFor="email">Your email</Label>
+    <div className="flex min-h-screen items-center justify-center bg-gray-50 dark:bg-gray-900 px-4">
+      <Card className="w-full max-w-md p-6 shadow-lg">
+        <div className="mb-6 text-center">
+          <img alt="Trackey logo" src={logo} className="mx-auto h-12" />
+          <h1 className="mt-2 text-2xl font-bold text-blue-600 dark:text-blue-400">
+            Trackey
+          </h1>
+          <p className="mt-1 text-sm text-gray-600 dark:text-gray-300">
+            Sign in to your account
+          </p>
+        </div>
+
+        <form onSubmit={handleLogin}>
+          <div className="mb-4">
+            <Label htmlFor="email">Email address</Label>
             <TextInput
               id="email"
               name="email"
-              placeholder="name@company.com"
+              placeholder="you@trackey.com"
               type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
             />
           </div>
-          <div className="mb-6 flex flex-col gap-y-3">
-            <Label htmlFor="password">Your password</Label>
+
+          <div className="mb-4">
+            <Label htmlFor="password">Password</Label>
             <TextInput
               id="password"
               name="password"
               placeholder="••••••••"
               type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
             />
           </div>
-          <div className="mb-6 flex items-center justify-between">
-            <div className="flex items-center gap-x-3">
+
+          <div className="mb-4 flex items-center justify-between">
+            <div className="flex items-center gap-x-2">
               <Checkbox id="rememberMe" name="rememberMe" />
               <Label htmlFor="rememberMe">Remember me</Label>
             </div>
             <a
               href="#"
-              className="w-1/2 text-right text-sm text-primary-600 dark:text-primary-300"
+              className="text-sm text-blue-600 hover:underline dark:text-blue-400"
             >
-              Lost Password?
+              Forgot password?
             </a>
           </div>
-          <div className="mb-6">
-            <Button type="submit" className="w-full lg:w-auto">
-              Login to your account
-            </Button>
-          </div>
-          <p className="text-sm text-gray-500 dark:text-gray-300">
-            Not registered?&nbsp;
-            <a href="#" className="text-primary-600 dark:text-primary-300">
-              Create account
-            </a>
-          </p>
+
+          <Button type="submit" className="w-full">
+            Login
+          </Button>
         </form>
+
+        <p className="mt-6 text-center text-sm text-gray-500 dark:text-gray-400">
+          Don't have an account?{" "}
+          <a
+            href="#"
+            className="text-blue-600 hover:underline dark:text-blue-400"
+          >
+            Sign up
+          </a>
+        </p>
       </Card>
     </div>
   );

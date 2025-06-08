@@ -17,6 +17,7 @@ import {
   HiShoppingBag,
   HiUsers,
 } from "react-icons/hi";
+import { useNavigate } from "react-router";
 
 const ExampleSidebar: FC = function () {
   const [currentPage, setCurrentPage] = useState("");
@@ -27,6 +28,12 @@ const ExampleSidebar: FC = function () {
     setCurrentPage(newPage);
   }, [setCurrentPage]);
 
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem("trackeyUser"); // Clear user data
+    navigate("/authentication/sign-in"); // Redirect to login
+  };
   return (
     <Sidebar aria-label="Sidebar with multi-level dropdown example">
       <div className="flex h-full flex-col justify-between py-2">
@@ -77,7 +84,11 @@ const ExampleSidebar: FC = function () {
               </Sidebar.Item>
             </Sidebar.ItemGroup>
             <Sidebar.ItemGroup>
-              <Sidebar.Item href="/authentication/sign-in" icon={HiLogout}>
+              <Sidebar.Item
+                onClick={handleLogout}
+                href="/authentication/sign-in"
+                icon={HiLogout}
+              >
                 Logout
               </Sidebar.Item>
             </Sidebar.ItemGroup>
