@@ -1,5 +1,5 @@
 import NavbarSidebarLayout from "../layouts/navbar-sidebar";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button, Modal } from "flowbite-react";
 import { HiKey, HiStatusOnline, HiStatusOffline } from "react-icons/hi";
 import { motion } from "framer-motion";
@@ -11,6 +11,7 @@ import {
   Legend,
   Tooltip,
 } from "recharts";
+import useCrudDoor from "../hooks/useCrudDoor";
 
 const ManageKeys = () => {
   const [keys] = useState([
@@ -22,6 +23,7 @@ const ManageKeys = () => {
 
   const [selectedSlot, setSelectedSlot] = useState(null);
   const [showInfoModal, setShowInfoModal] = useState(false);
+  const [doorStatus, setDoorStatus] = useState(null);
 
   // Create 12 slots (6x2 grid)
   const slots = Array(12)
@@ -43,12 +45,33 @@ const ManageKeys = () => {
 
   const COLORS = ["#10B981", "#EF4444"];
 
+  const { handleDoor, getDoorStatus } = useCrudDoor();
+
+  const handleOpenDoor = () => {
+    handleDoor(!doorStatus);
+  };
+
+  useEffect(() => {
+    getDoorStatus(setDoorStatus);
+  }, []);
+
   return (
     <NavbarSidebarLayout>
       <div className="container mx-auto p-6 h-screen bg-white dark:bg-gray-800">
-        <h1 className="text-3xl font-semibold mb-4 text-black dark:text-white">
-          Key Storage Dashboard
-        </h1>
+        <div className="flex justify-between items-center">
+          <h1 className="text-3xl font-semibold mb-4 text-black dark:text-white">
+            Key Storage Dashboard
+          </h1>
+          <div className="flex items-center justify-center">
+            <h1 className="text-2xl font-bold mr-3">Main Door Status: </h1>
+            <Button
+              color={doorStatus ? "success" : "failure"}
+              onClick={handleOpenDoor}
+            >
+              {doorStatus ? "Open Door" : "Close Door"}
+            </Button>
+          </div>
+        </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
           {/* Key Statistics Cards */}
