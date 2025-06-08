@@ -16,7 +16,7 @@ const Schedules = () => {
     end: "",
   });
 
-  const { addSched, getScheds } = useCrudSched();
+  const { addSched, getScheds, deleteSched } = useCrudSched();
 
   const handleAddEvent = () => {
     console.log("fkdj");
@@ -45,6 +45,14 @@ const Schedules = () => {
             initialView="timeGridWeek"
             events={events}
             height="100%"
+            eventClick={(info) => {
+              const confirmed = window.confirm(
+                `Delete event "${info.event.title}"?`
+              );
+              if (confirmed) {
+                deleteSched(info.event.id, setEvents);
+              }
+            }}
           />
         </div>
 

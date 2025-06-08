@@ -1,5 +1,5 @@
 import { database } from "../../firebase";
-import { onValue, push, ref } from "firebase/database";
+import { onValue, push, ref, remove } from "firebase/database";
 
 const useCrudSched = () => {
   const addSched = async (data) => {
@@ -19,18 +19,24 @@ const useCrudSched = () => {
             id: key,
             ...value,
           }));
-          setScheds(scheds); // ✅ Correctly call setScheds
+          setScheds(scheds);
         } else {
-          setScheds([]); // ✅ Still update state with empty array if no data
+          setScheds([]);
         }
       },
       {
-        onlyOnce: true, // Fetch data only once
+        onlyOnce: true,
       }
     );
   };
 
-  return { addSched, getScheds };
+  const deleteSched = async (id, setScheds) => {
+    const schedRef = ref(database, `schedules/${id}`);
+    await remove(schedRef);
+    getScheds(setScheds); // Refresh the list after deletion
+  };
+
+  return { addSched, getScheds, deleteSched };
 };
 
 export default useCrudSched;
