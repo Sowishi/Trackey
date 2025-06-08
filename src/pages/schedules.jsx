@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
@@ -16,13 +16,19 @@ const Schedules = () => {
     end: "",
   });
 
-  const { addSched } = useCrudSched();
+  const { addSched, getScheds } = useCrudSched();
 
   const handleAddEvent = () => {
     console.log("fkdj");
     addSched(newEvent);
     setOpenModal(false);
   };
+
+  useEffect(() => {
+    getScheds(setEvents);
+  }, []);
+
+  console.log(events);
 
   return (
     <NavbarSidebarLayout>
