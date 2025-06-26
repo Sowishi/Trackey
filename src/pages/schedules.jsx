@@ -4,6 +4,7 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import NavbarSidebarLayout from "../layouts/navbar-sidebar";
 import { Modal, Button, Label, TextInput } from "flowbite-react";
+import { HiCalendar, HiPlus } from "react-icons/hi";
 import useCrudSched from "../hooks/useCrudSched";
 
 const Schedules = () => {
@@ -32,14 +33,19 @@ const Schedules = () => {
 
   return (
     <NavbarSidebarLayout>
-      <div className="container mx-auto h-screen p-4">
-        <h1 className="text-3xl font-bold mb-4">Schedules</h1>
+      <div className="container mx-auto h-screen p-4 bg-white dark:bg-gray-800 text-gray-900 dark:text-white">
+        <h1 className="text-3xl font-bold mb-4 flex items-center gap-2">
+          <HiCalendar />
+          Schedules
+        </h1>
 
         <div className="mb-4">
-          <Button onClick={() => setOpenModal(true)}>Add Schedule</Button>
+          <Button onClick={() => setOpenModal(true)}>
+            <HiPlus className="mr-2" /> Add Schedule
+          </Button>
         </div>
 
-        <div className="h-[80vh] bg-white p-4 rounded-lg shadow-lg">
+        <div className="h-[80vh] bg-white dark:bg-gray-700 p-4 rounded-lg shadow-lg">
           <FullCalendar
             plugins={[dayGridPlugin, timeGridPlugin]}
             initialView="timeGridWeek"
@@ -47,7 +53,7 @@ const Schedules = () => {
             height="100%"
             eventClick={(info) => {
               const confirmed = window.confirm(
-                `Delete event "${info.event.title}"?`
+                `Delete event "${info.event.title}"?`,
               );
               if (confirmed) {
                 deleteSched(info.event.id, setEvents);
