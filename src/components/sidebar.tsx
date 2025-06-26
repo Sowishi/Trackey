@@ -31,8 +31,10 @@ const ExampleSidebar: FC = function () {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    localStorage.removeItem("trackeyUser"); // Clear user data
-    navigate("/authentication/sign-in"); // Redirect to login
+    if (window.confirm("Are you sure you want to logout?")) {
+      localStorage.removeItem("trackeyUser"); // Clear user data
+      navigate("/authentication/sign-in"); // Redirect to login
+    }
   };
   return (
     <Sidebar aria-label="Sidebar with multi-level dropdown example">
