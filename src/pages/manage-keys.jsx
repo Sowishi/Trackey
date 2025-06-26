@@ -139,8 +139,10 @@ const ManageKeys = () => {
           <Modal.Body>
             <div className="flex justify-center items-center flex-col">
               <div className="w-80 text-center">
-                <h1 className="text-3xl mb-10 font-bold">Register your RFID</h1>
-                <p className="opacity-50">
+                <h1 className="text-3xl mb-10 font-bold dark:text-white">
+                  Register your RFID
+                </h1>
+                <p className="opacity-50 dark:text-white">
                   Register your RFID using the device, then choose a slot for
                   the enrolled tag.
                 </p>
@@ -162,15 +164,25 @@ const ManageKeys = () => {
                 </div>
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <p className="text-sm text-gray-500">Key Name</p>
-                    <p className="font-medium">{slots[selectedSlot].keyName}</p>
+                    <p className="text-sm text-gray-500 dark:text-white">
+                      Key Name
+                    </p>
+                    <p className="font-medium dark:text-white">
+                      {slots[selectedSlot].keyName}
+                    </p>
                   </div>
                   <div>
-                    <p className="text-sm text-gray-500">RFID Number</p>
-                    <p className="font-mono">{slots[selectedSlot].rfid}</p>
+                    <p className="text-sm text-gray-500 dark:text-white">
+                      RFID Number
+                    </p>
+                    <p className="font-mono dark:text-white">
+                      {slots[selectedSlot].rfid}
+                    </p>
                   </div>
                   <div>
-                    <p className="text-sm text-gray-500">Status</p>
+                    <p className="text-sm text-gray-500 dark:text-white">
+                      Status
+                    </p>
                     <p
                       className={`font-medium ${
                         slots[selectedSlot].available
@@ -183,7 +195,9 @@ const ManageKeys = () => {
                   </div>
                   <div>
                     <p className="text-sm text-gray-500">Slot Number</p>
-                    <p className="font-medium">{selectedSlot + 1}</p>
+                    <p className="font-medium dark:text-white">
+                      {selectedSlot + 1}
+                    </p>
                   </div>
                 </div>
               </div>

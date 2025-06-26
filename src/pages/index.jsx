@@ -63,7 +63,9 @@ const ManageKeys = () => {
             Key Storage Dashboard
           </h1>
           <div className="flex items-center justify-center">
-            <h1 className="text-2xl font-bold mr-3">Main Door Status: </h1>
+            <h1 className="text-2xl font-bold mr-3 dark:text-white">
+              Main Door Status:{" "}
+            </h1>
             <Button
               color={doorStatus ? "success" : "failure"}
               onClick={handleOpenDoor}
