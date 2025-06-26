@@ -4,7 +4,18 @@ import { onValue, push, ref, remove } from "firebase/database";
 const useCrudSched = () => {
   const addSched = async (data) => {
     const docRef = ref(database, "schedules");
-    await push(docRef, data);
+
+    // Construct start and end datetime strings
+    const start = `${data.startDate}T${data.startTime}`;
+    const end = `${data.endDate}T${data.endTime}`;
+
+    const newData = {
+      ...data,
+      start,
+      end,
+    };
+
+    await push(docRef, newData);
   };
 
   const getScheds = (setScheds) => {
