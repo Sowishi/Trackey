@@ -5,6 +5,7 @@ import {
   doc,
   onSnapshot,
   serverTimestamp,
+  updateDoc,
 } from "firebase/firestore";
 import { db } from "../../firebase";
 const useCrudUsers = () => {
@@ -36,6 +37,15 @@ const useCrudUsers = () => {
     }
   };
 
+  const updateUser = async (id, data) => {
+    try {
+      const docRef = doc(db, "users", id);
+      await updateDoc(docRef, data);
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  };
+
   const getUsers = (setUsers) => {
     onSnapshot(colRef, (snaphot) => {
       const output = [];
@@ -46,7 +56,7 @@ const useCrudUsers = () => {
     });
   };
 
-  return { addUser, getUsers, deleteUser };
+  return { addUser, getUsers, deleteUser, updateUser };
 };
 
 export default useCrudUsers;

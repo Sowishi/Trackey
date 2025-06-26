@@ -27,8 +27,12 @@ import { toast } from "react-toastify";
 
 const UserListPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [users, setUsers] = useState([]);
+  const [search, setSearch] = useState("");
+  const [currentUser, setCurrentUser] = useState(null);
+  const [deleteUserId, setDeleteUserId] = useState(null);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -36,7 +40,7 @@ const UserListPage = () => {
     gender: "Male",
     password: "",
   });
-  const { addUser, getUsers, deleteUser } = useCrudUser();
+  const { addUser, getUsers, deleteUser, updateUser } = useCrudUser();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -59,10 +63,39 @@ const UserListPage = () => {
     }
   };
 
-  const handleDelete = async (id) => {
+  const handleUpdate = async () => {
+    if (!currentUser) return;
     try {
-      await deleteUser(id);
+      await updateUser(currentUser.id, formData);
+      setIsEditModalOpen(false);
+      setCurrentUser(null);
+      toast.success("Updated Successfully!");
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
+
+  const handleEdit = (user) => {
+    setCurrentUser(user);
+    setFormData({
+      name: user.name,
+      email: user.email,
+      position: user.position,
+      gender: user.gender,
+      password: "",
+    });
+    setIsEditModalOpen(true);
+  };
+
+  const handleDelete = (id) => {
+    setDeleteUserId(id);
+  };
+
+  const confirmDelete = async () => {
+    try {
+      await deleteUser(deleteUserId);
       toast.success("Deleted Successfully!");
+      setDeleteUserId(null);
     } catch (error) {
       toast.error(error.message);
     }
@@ -71,6 +104,12 @@ const UserListPage = () => {
   useEffect(() => {
     getUsers(setUsers);
   }, []);
+
+  const filteredUsers = users.filter(
+    (u) =>
+      u.name.toLowerCase().includes(search.toLowerCase()) ||
+      u.email.toLowerCase().includes(search.toLowerCase()),
+  );
 
   return (
     <NavbarSidebarLayout isFooter={false}>
@@ -102,6 +141,8 @@ const UserListPage = () => {
                     id="users-search"
                     name="users-search"
                     placeholder="Search for users"
+                    value={search}
+                    onChange={(e) => setSearch(e.target.value)}
                   />
                 </div>
               </form>
@@ -133,7 +174,11 @@ const UserListPage = () => {
               )}
 
               {users.length >= 1 && (
-                <AdminTable users={users} handleDelete={handleDelete} />
+                <AdminTable
+                  users={filteredUsers}
+                  handleDelete={handleDelete}
+                  handleEdit={handleEdit}
+                />
               )}
             </div>
           </div>
@@ -204,6 +249,78 @@ const UserListPage = () => {
           <Button onClick={handleSubmit}>Submit</Button>
           <Button color="gray" onClick={() => setIsModalOpen(false)}>
             Cancel
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
+      {/* Edit User Modal */}
+      <Modal show={isEditModalOpen} onClose={() => setIsEditModalOpen(false)}>
+        <Modal.Header>Edit User</Modal.Header>
+        <Modal.Body>
+          <div className="space-y-4">
+            <Label>Name</Label>
+            <TextInput
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+            />
+
+            <Label>Email</Label>
+            <TextInput
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+            />
+
+            <Label>Position</Label>
+            <TextInput
+              disabled
+              name="position"
+              value={formData.position}
+              onChange={handleChange}
+            />
+
+            <Label>Gender</Label>
+            <Select
+              name="gender"
+              value={formData.gender}
+              onChange={handleChange}
+            >
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Other">Other</option>
+            </Select>
+          </div>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button onClick={handleUpdate}>Update</Button>
+          <Button color="gray" onClick={() => setIsEditModalOpen(false)}>
+            Cancel
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
+      {/* Delete Confirmation Modal */}
+      <Modal
+        show={!!deleteUserId}
+        size="md"
+        onClose={() => setDeleteUserId(null)}
+      >
+        <Modal.Header>Delete user</Modal.Header>
+        <Modal.Body>
+          <div className="text-center">
+            <HiExclamationCircle className="mx-auto mb-4 h-14 w-14 text-gray-400 dark:text-gray-200" />
+            <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
+              Are you sure you want to delete this user?
+            </h3>
+          </div>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button color="failure" onClick={confirmDelete}>
+            Yes, I'm sure
+          </Button>
+          <Button color="gray" onClick={() => setDeleteUserId(null)}>
+            No, cancel
           </Button>
         </Modal.Footer>
       </Modal>

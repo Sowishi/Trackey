@@ -3,7 +3,7 @@ import moment from "moment";
 import { FaEdit } from "react-icons/fa";
 import { HiTrash } from "react-icons/hi";
 
-const AdminTable = ({ users, handleDelete }) => {
+const AdminTable = ({ users, handleDelete, handleEdit }) => {
   return (
     <div className="overflow-x-auto">
       <Table className="w-full text-left text-sm text-gray-500 dark:text-gray-400">
@@ -62,7 +62,11 @@ const AdminTable = ({ users, handleDelete }) => {
                     : "---"}
                 </Table.Cell>
                 <Table.Cell className="p-4 flex justify-center space-x-2">
-                  <Button color="info" size="sm">
+                  <Button
+                    color="info"
+                    size="sm"
+                    onClick={() => handleEdit(user)}
+                  >
                     <FaEdit className="mr-1" /> Edit
                   </Button>
                   <Button
